@@ -151,6 +151,7 @@ body{
 
 .right-col{
     width: 40%;
+    display: none;
     
 }
 
@@ -300,3 +301,209 @@ body{
 
 
 }
+
+
+/* Resturant Page*/
+
+
+.name{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    
+
+}
+.resultss{
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 15px;
+    margin-left: 15px;
+   
+}
+
+.main-resturant{
+    margin-top: 80px;
+    margin-left: 100px;
+    margin-right: 100px;
+}
+
+.resturant{
+    width: 350px;
+    background-color: #FFF;
+    border-radius: 7px;
+    box-shadow: 0px 0.2px 20px#05050548;
+    height: 150px;
+    display: flex;
+    gap: 2px;
+}
+.name-low h3{
+    font-size: 16px;
+    display: inline;
+}
+
+.name h2{
+    font-size: 14px;
+    margin-top: 4px;
+    margin-bottom: 4px;
+}
+.name-low{
+    display: inline;
+}
+
+.mainimg{
+    width: 30%;
+    height: 100%;
+    display: inline-block;
+   
+}
+.mainimg img{
+    width:100% ;height: 100%;
+
+}
+.low-a img{
+    width: 15px;
+}
+.low-a{
+    display: inline;
+    margin-left: 65px;
+    justify-content: center;
+    align-items: center;
+}
+
+.new-name{
+    display: flex;
+    margin-bottom: 16px;
+    align-items: center;
+}
+.name{
+    width: 65%;
+    padding: 4px 6px;
+    display: inline-block;;
+}
+.resturant p{
+    margin-right: 6px;
+    font-size: 12px;
+    width: 150px;
+    display: inline;
+    color: #0000008c;
+}
+.show-result{
+    background-color: #FFF;
+    margin-top: 40px;
+    border-radius: 7px;
+    display: none;
+}
+
+.heading{
+
+    padding: 40px 30px;  
+}
+.main-resturant a{
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: medium;
+    font-family: 'inter';
+    padding: 15px 20px;
+    border: none;
+    border-radius: 7px;
+    background-color: #F7941D;
+    color: #FFF;
+}
+.btn-align{
+    text-align: center;
+}
+.span{
+    font-size: 12px;
+    font-weight: medium;
+    color: #000000;
+}
+
+/******* Responsive REsturant Page *******/
+
+/******* Tablet *******/
+
+
+@media screen and (max-width: 770px){
+
+    .resultss{
+        grid-template-columns: repeat(2,1fr);
+    }
+    .name h3{
+        font-size: 14px;
+    }
+    .name p{
+        font-size: 10px;
+        margin-left: 0px;
+        margin-right: 0px;
+    }
+    .span {
+        font-size: 12px;
+    }
+    .resturant{
+        width: 250px;
+    }
+    .low-a{
+        margin-left: 2px;
+    }
+
+    }
+    
+    /******* Mobile *******/
+    
+    @media screen and (max-width:430px) {
+        .resultss{
+            grid-template-columns: repeat(1,1fr);
+            margin-left: 15px;
+        }
+        
+        .resturant{
+           width: 200px;
+           
+        }
+        .mainimg{
+            width:40%;
+        }
+        .name-low{
+            display: flex;
+            align-items: center;
+            
+        }
+        .name{
+            margin-top: 4px;
+        }
+        .low-a img{
+            width: 8px;
+            margin-left: 5px;
+        }
+        .low-a{
+            display: flex;
+            width: 35px;
+            align-items: center;
+            justify-content: end;
+        }
+        .low-a p{
+            font-size: 8px;
+        }
+        .heading{
+            font-size: 16px;
+        }
+        .name h3{
+            font-size: 11px;
+        }
+        .name p{
+            font-size: 9px;
+            line-height: 1px;
+        }
+        .span {
+            font-size: 10px;
+        }
+        .name h2{
+            font-size: 10px;
+        }
+        .new-name {
+            margin-bottom: 0px;
+        }
+    }
+    
+    
