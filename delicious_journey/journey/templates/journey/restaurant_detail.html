@@ -1,0 +1,25 @@
+<!-- restaurant_detail.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Restaurant Details</title>
+    <style>
+        img {
+            max-height: 400px;
+            max-width: 400px;
+            height: auto;
+            width: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>{{ restaurant.restaurant_name }} - {{ restaurant.date }}</h1>
+    <div>
+        {% for photo in restaurant.photos.all %}
+            <img src="{{ photo.photo.url }}" alt="Photo">
+        {% endfor %}
+    </div>
+    <p>{{ restaurant.comment }}</p>
+    <a href="{% url 'history_comments' %}">Back to History</a>
+</body>
+</html>

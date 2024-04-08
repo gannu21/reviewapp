@@ -1,0 +1,70 @@
+<!--DOCTYPE html>
+<html>
+<head>
+    <title>Delicious Memory</title>
+</head>
+<body style="background-color:white;">
+    <h1>Search Your History</h1>
+    <form method="get">
+        <input type="text" name="q" placeholder="Search restaurants...">
+        <button type="submit">Search</button>
+    </form>
+    {% for restaurant in restaurants %}
+        <div>
+            <h3>{{ restaurant.restaurant_name }}</h3>
+            <p>{{ restaurant.comment }}</p>
+            {% for photo in restaurant.photos.all %}
+                <img src="{{ photo.photo.url }}" alt="Photo" style="width:100px;height:auto;">
+            {% endfor %}
+        </div>
+    {% endfor %}
+    <a href="{% url 'home' %}">Back to Home</a>
+</body>
+</html-->
+<!-- history_comments.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Search Your History</title>
+    <style>
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px; /* adjust spacing between images */
+        }
+        .gallery img {
+            width: 100px; /* adjust size as needed */
+            height: auto;
+        }
+        .gallery-item {
+            margin-bottom: 20px; /* adjust spacing between rows */
+        }
+        .record-link {
+            display: block;
+            margin-top: 5px;
+            text-decoration: none;
+            color: black; /* adjust color as needed */
+        }
+    </style>
+</head>
+<body>
+    <h1>Search Your History</h1>
+    <form method="get">
+        <input type="text" name="q" placeholder="Search restaurants...">
+        <button type="submit">Search</button>
+    </form>
+    {% for restaurant in restaurants %}
+        <div class="gallery-item">
+            <div class="gallery">
+                {% for photo in restaurant.photos.all|slice:":5" %}
+                    <img src="{{ photo.photo.url }}" alt="Photo">
+                {% endfor %}
+            </div>
+            <a href="{% url 'restaurant_detail' restaurant.id %}" class="record-link">{{ restaurant.restaurant_name }} - {{ restaurant.date }}</a>
+        </div>
+    {% empty %}
+        <p>No records found.</p>
+    {% endfor %}
+    <a href="{% url 'home' %}">Back to Home</a>
+</body>
+</html>
