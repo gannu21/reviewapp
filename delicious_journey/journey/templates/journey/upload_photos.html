@@ -1,0 +1,135 @@
+{% load static %} <!-- Add this line at the top of your HTML file to use the static template tag -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Upload New Records</title>
+    <style>
+        body {
+            background-image: url('{% static "journey/images/upload_photos_background_image.jpg" %}');
+            background-size: cover; /* Cover the entire page */
+            background-repeat: no-repeat; /* Do not repeat the image */
+            background-attachment: fixed; /* The background image does not scroll with the page */
+        }
+        #file-upload-form {
+        margin-top: 170px; /* Adjusts space below the "Back to Home" picture */
+        }
+        #drop-area {
+            
+            border: 2px dashed #ccc;
+            border-radius: 5px;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        #gallery {
+            display: flex;
+            flex-direction: row;
+            margin-bottom: 20px;
+        }
+        #gallery img {
+            margin-right: 5px;
+            width: 200px; /* Small size images */
+            height: auto;
+        }
+        #back-home {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+        }
+        #back-home img {
+        width: 200px; /* Set the width of the image */
+        height: auto; /* Set the height of the image */
+        object-fit: cover; /* This will cover the area, cropping the image if necessary */
+    }
+        /* Additional styles here */
+    </style>
+</head>
+<body style="background-color:white;">
+    <a href="{% url 'home' %}" id="back-home">
+        <img src="{% static 'journey/images/back_home_image.jpg' %}" alt="Back to Home">
+    </a>
+    <h1 style="text-align:center;">Upload Your Delicious Moments</h1>
+    
+    <form method="post" enctype="multipart/form-data" id="file-upload-form">
+        {% csrf_token %}
+        <!-- The drop area for dragging and dropping files -->
+        <div id="drop-area">
+            <p>Drag and drop files here</p>
+            <input type="file" id="fileElem" multiple accept="image/*" style="display:none;">
+            <label for="fileElem">or click to select files</label>
+        </div>
+        
+        <!-- The gallery for displaying selected images -->
+        <div id="gallery"></div>
+
+        {{ form.as_p }}
+        <!-- The photo form input can be hidden as we're using a custom drag-and-drop -->
+        <!--{{ photo_form.as_p }} -->
+
+        <button type="submit">Submit</button>
+    </form>
+
+    <script>
+        // JavaScript for handling the drag and drop functionality and image previews
+        let dropArea = document.getElementById('drop-area');
+        let fileInput = document.getElementById('fileElem');
+        let gallery = document.getElementById('gallery');
+        
+        ;['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+            dropArea.addEventListener(eventName, preventDefaults, false);
+        });
+
+        function preventDefaults(e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+
+        ;['dragenter', 'dragover'].forEach(eventName => {
+            dropArea.addEventListener(eventName, highlight, false);
+        });
+
+        ;['dragleave', 'drop'].forEach(eventName => {
+            dropArea.addEventListener(eventName, unhighlight, false);
+        });
+
+        function highlight(e) {
+            dropArea.classList.add('highlight');
+        }
+
+        function unhighlight(e) {
+            dropArea.classList.remove('highlight');
+        }
+
+        dropArea.addEventListener('drop', handleDrop, false);
+
+        function handleDrop(e) {
+            let dt = e.dataTransfer;
+            let files = dt.files;
+
+            handleFiles(files);
+        }
+
+        fileInput.addEventListener('change', (e) => {
+            handleFiles(fileInput.files);
+        });
+
+        function handleFiles(files) {
+            ([...files]).forEach(previewFile);
+        }
+
+        function previewFile(file) {
+            let reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onloadend = function() {
+                let img = document.createElement('img');
+                img.src = reader.result;
+                gallery.appendChild(img);
+                // Add remove button or functionality here if needed
+            }
+        }
+    </script>
+</body>
+</html>
+
