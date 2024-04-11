@@ -7,4 +7,5 @@ urlpatterns = [
     path('history/', views.history_comments, name='history_comments'),
     path('best/', views.your_best, name='your_best'),
     path('restaurant/<int:restaurant_id>/', views.restaurant_detail, name='restaurant_detail'),
+
 ]
